@@ -622,6 +622,14 @@ img,svg{display:block}
   burger.addEventListener('click', () => document.body.classList.toggle('menu-open'));
   document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('menu-open')));
 
+  /* logo → scroll to top */
+  document.querySelectorAll('a.logo').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.classList.remove('menu-open');
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  }));
+
   /* reveal */
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
