@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AXIS — детейлінг-студія, Житомир</title>
+<meta name="description" content="AXIS — хімчистка салону, мийка, полірування та кераміка авто в Житомирі. Вул. Труда, 41. Запис: 066 648 23 00.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#090909; --bg2:#0e0e0e; --card:#121212; --card2:#161616;
+  --line:#232323; --line2:#2e2e2e;
+  --text:#f2f2f2; --muted:#9a9a9a; --dim:#6a6a6a;
+  --accent:#2cb5ee; --accent-d:#1f9fd6;
+  --wrap:1200px;
+  --display:'Unbounded', 'Arial Black', sans-serif;
+  --body:'Inter', system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+img,svg{display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* ---------- common ---------- */
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:.06em;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 26px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#04121a}
+.btn-primary:hover{background:#5cc8f4;box-shadow:0 8px 30px rgba(44,181,238,.25)}
+.btn-ghost{border-color:#3a3a3a;color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.section{padding:120px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:56px}
+.sec-head p{max-width:400px;color:var(--muted);font-size:14px}
+.ph{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7a7a7a}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- header ---------- */
+.header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(9,9,9,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #1b1b1b}
+.header .wrap{display:flex;align-items:center;height:72px;gap:40px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;letter-spacing:.32em;font-size:15px}
+.logo svg{width:26px;height:24px}
+.nav{display:flex;gap:30px;margin:0 auto}
+.nav a{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#cfcfcf;transition:.2s}
+.nav a:hover{color:var(--accent)}
+.h-right{display:flex;align-items:center;gap:22px}
+.h-phone{font-size:13px;font-weight:600;letter-spacing:.04em}
+.h-right .btn{height:40px;padding:0 20px;font-size:11px}
+.burger{display:none;width:44px;height:44px;background:none;border:1px solid #333;cursor:pointer;position:relative}
+.burger span{position:absolute;left:12px;right:12px;height:1.5px;background:#fff;transition:.25s}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:26px}
+.menu-open .burger span:nth-child(1){top:21px;transform:rotate(45deg)}
+.menu-open .burger span:nth-child(2){opacity:0}
+.menu-open .burger span:nth-child(3){top:21px;transform:rotate(-45deg)}
+.mobile-menu{display:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;padding:150px 0 70px;overflow:hidden;border-bottom:1px solid #1b1b1b;
+  background:
+    radial-gradient(ellipse 40% 60% at 12% 40%,rgba(255,255,255,.07),transparent 70%),
+    repeating-linear-gradient(118deg,transparent 0 140px,rgba(255,255,255,.035) 140px 141px),
+    var(--bg)}
+.hero-a{position:absolute;right:-6%;top:12%;width:min(62vw,820px);opacity:.9;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-eyebrow{display:flex;align-items:center;gap:16px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#cfcfcf}
+.hero-eyebrow::before{content:"";width:46px;height:1.5px;background:var(--accent)}
+.hero h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(46px,8.4vw,108px);line-height:1;letter-spacing:.07em;margin:30px 0 34px}
+.hero-lead{max-width:440px;color:#c8c8c8;font-size:16px;line-height:1.65}
+.hero-btns{display:flex;gap:12px;margin:38px 0 60px;flex-wrap:wrap}
+.hero-feats{display:grid;grid-template-columns:repeat(3,1fr);max-width:740px;border:1px solid var(--line2);background:rgba(14,14,14,.7);backdrop-filter:blur(6px)}
+.hero-feats div{display:flex;align-items:center;gap:14px;padding:22px 22px;font-size:13px;font-weight:500}
+.hero-feats div+div{border-left:1px solid var(--line2)}
+.hero-feats svg{width:20px;height:20px;flex:none;color:var(--accent)}
+.hero-media{position:absolute;right:32px;bottom:22px;border:1px solid #2c2c2c;padding:6px 10px;z-index:2}
+
+/* ---------- services ---------- */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.svc{position:relative;background:var(--card);border:1px solid var(--line);padding:26px 24px 22px;display:flex;flex-direction:column;min-height:300px;
+  clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%);transition:.25s}
+.svc::after{content:"";position:absolute;top:0;right:0;width:31px;height:1px;background:var(--line);transform-origin:right top;transform:translate(0,0) rotate(45deg) translate(9px,0);display:none}
+.svc:hover{background:var(--card2);border-color:#333;transform:translateY(-4px)}
+.svc:hover .svc-arrow{transform:translate(3px,-3px)}
+.svc-num{font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.svc-ico{width:24px;height:24px;margin:22px 0 22px;color:#fff}
+.svc h3{font-size:17px;font-weight:600;margin-bottom:12px}
+.svc p{font-size:13px;color:var(--muted);line-height:1.6;flex:1}
+.svc-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:22px;padding-top:18px;font-size:14px;font-weight:600}
+.svc-arrow{color:var(--accent);transition:.2s}
+
+/* ---------- calculator ---------- */
+.calc{display:grid;grid-template-columns:1fr 330px;border:1px solid var(--line);background:
+  repeating-linear-gradient(118deg,transparent 0 60px,rgba(255,255,255,.012) 60px 61px),#0f0f0f}
+.calc-main{padding:48px 48px 52px}
+.calc-main .h2{font-size:clamp(28px,3.6vw,42px);margin-bottom:34px}
+.calc-group{margin-top:26px}
+.calc-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.opt{position:relative;text-align:left;background:#121212;border:1px solid #2a2a2a;padding:13px 16px;cursor:pointer;transition:.18s}
+.opt:hover{border-color:#444}
+.opt b{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.opt span{font-size:12px;color:var(--muted)}
+.opt.on{border-color:var(--accent);background:rgba(44,181,238,.07)}
+.opt.on span{color:var(--accent)}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.extra{display:flex;align-items:center;gap:14px;background:#121212;border:1px solid #2a2a2a;padding:12px 14px;cursor:pointer;transition:.18s;user-select:none}
+.extra:hover{border-color:#444}
+.extra .box{width:16px;height:16px;flex:none;border:1.5px solid #cfcfcf;display:grid;place-items:center;transition:.15s;background:#fff0}
+.extra .box svg{width:11px;height:11px;opacity:0;color:#04121a}
+.extra.on{border-color:var(--accent);background:rgba(44,181,238,.07)}
+.extra.on .box{background:var(--accent);border-color:var(--accent)}
+.extra.on .box svg{opacity:1}
+.extra .t{flex:1;font-size:13px;font-weight:500;line-height:1.3}
+.extra .t small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
+.qty{display:none;align-items:center;border:1px solid #3a3a3a}
+.extra.on .qty{display:flex}
+.qty button{width:26px;height:26px;background:none;border:0;cursor:pointer;color:#fff;font-size:15px}
+.qty button:hover{color:var(--accent)}
+.qty output{min-width:20px;text-align:center;font-size:12px;font-weight:600}
+.calc-side{border-left:1px solid var(--line);padding:48px 30px 40px;display:flex;flex-direction:column;background:#0b0b0b}
+.calc-side h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#cfcfcf;font-weight:500}
+.summary{margin-top:14px;flex:1;font-size:13px;color:var(--muted)}
+.summary ul{list-style:none}
+.summary li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed #262626;color:#ddd}
+.summary li span:last-child{white-space:nowrap;color:var(--muted)}
+.total-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#cfcfcf;margin-top:28px}
+.total{font-family:var(--display);font-size:30px;letter-spacing:.04em;margin:8px 0 8px;display:flex;align-items:baseline;gap:10px}
+.total small{font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.1em}
+.total-note{font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:20px}
+.calc-side .btn{width:100%;height:auto;min-height:46px;padding:12px 16px;white-space:normal;line-height:1.35}
+
+/* ---------- price list ---------- */
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pcol{background:var(--card);border:1px solid var(--line);padding:22px 22px 26px}
+.pcol h3{border:1px solid #3a3a3a;text-align:center;font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:11px 8px;margin-bottom:24px}
+.prow{margin-bottom:20px}
+.prow .top{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.prow .top span:last-child{color:var(--accent);white-space:nowrap}
+.prow p{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
+
+/* ---------- works ---------- */
+.works{background:#101010;border-top:1px solid #1b1b1b;border-bottom:1px solid #1b1b1b}
+.ba{position:relative;aspect-ratio:16/9;border:1px solid var(--line);overflow:hidden;user-select:none;cursor:ew-resize;touch-action:pan-y}
+.ba-pane{position:absolute;inset:0;display:flex;align-items:center}
+.ba-after{background:#151515 url(img/ba-after.jpg) center/cover}
+.ba-before{background:#151515 url(img/ba-before.jpg) center/cover;clip-path:inset(0 50% 0 0)}
+.ba-tag{bottom:24px;top:auto!important;transform:none!important}
+.ba-tag{position:absolute;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px}
+.ba-before .ba-tag{left:28px;background:#0b0b0b;color:#fff}
+.ba-after .ba-tag{right:28px;background:#fff;color:#111}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-1px);pointer-events:none}
+.ba-handle{position:absolute;top:50%;left:50%;width:40px;height:40px;transform:translate(-50%,-50%) rotate(45deg);background:#0b0b0b;border:1.5px solid #fff;display:grid;place-items:center;pointer-events:none}
+.ba-handle span{transform:rotate(-45deg);font-size:13px;font-weight:700;letter-spacing:-1px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.work{position:relative;aspect-ratio:3/2;border:1px solid var(--line);overflow:hidden;cursor:zoom-in;background:#151515;padding:0}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.work:hover img{transform:scale(1.04)}
+.work::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-1px);opacity:.85}
+.work .lb{position:absolute;bottom:12px;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;z-index:1}
+.work .lb.b{right:calc(50% + 10px);background:#0b0b0b;color:#fff}
+.work .lb.a{left:calc(50% + 10px);background:#fff;color:#111}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:60px 70px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border:1px solid #2a2a2a}
+.lightbox button{position:absolute;background:none;border:1px solid #444;color:#fff;width:48px;height:48px;font-size:22px;cursor:pointer;transition:.2s}
+.lightbox button:hover{border-color:var(--accent);color:var(--accent)}
+.lb-close{top:16px;right:16px}.lb-prev{left:12px;top:50%;transform:translateY(-50%)}.lb-next{right:12px;top:50%;transform:translateY(-50%)}
+@media (max-width:600px){.lightbox{padding:70px 10px}.lb-prev,.lb-next{top:auto!important;bottom:14px;transform:none!important}.lb-prev{left:calc(50% - 56px)}.lb-next{right:calc(50% - 56px)}}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;border-top:1px solid var(--line);margin-top:10px}
+.step{position:relative;padding-top:24px}
+.step::before{content:"";position:absolute;top:-1px;left:0;width:44px;height:2px;background:var(--accent)}
+.step .n{font-family:var(--display);font-weight:500;font-size:44px;line-height:1;color:#2b2b2b;letter-spacing:.02em;transition:.3s}
+.step:hover .n{color:var(--accent)}
+.step h3{font-size:15px;font-weight:600;margin:18px 0 10px}
+.step p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ---------- booking ---------- */
+.booking{background:
+  repeating-linear-gradient(118deg,transparent 0 90px,rgba(255,255,255,.015) 90px 91px),#111;
+  border-top:1px solid #1b1b1b;border-bottom:1px solid #1b1b1b}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.book-text p{color:var(--muted);font-size:14px;margin-top:24px;max-width:340px;line-height:1.7}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#bdbdbd}
+.field input,.field select,.field textarea{height:46px;background:#141414;border:1px solid #2c2c2c;padding:0 14px;font-size:14px;outline:none;transition:.18s;border-radius:0;color-scheme:dark;width:100%}
+.field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23ccc' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.field textarea{height:96px;padding:12px 14px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#5f5f5f}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.field.err input,.field.err select{border-color:#e5484d}
+.form-foot{grid-column:1/-1;margin-top:8px}
+.form-foot .btn{min-width:200px}
+.form-foot small{display:block;font-size:11px;color:var(--dim);margin-top:14px}
+.form-ok{display:none;grid-column:1/-1;border:1px solid var(--accent);background:rgba(44,181,238,.06);padding:28px}
+.form-ok h3{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
+.form-ok p{color:var(--muted);font-size:14px}
+.sent .form > :not(.form-ok){display:none}
+.sent .form-ok{display:block}
+
+/* ---------- location ---------- */
+.loc{display:grid;grid-template-columns:370px 1fr;gap:12px}
+.loc-card{background:var(--card);border:1px solid var(--line);padding:40px 30px 34px}
+.loc-card .h2{font-size:clamp(28px,3.4vw,40px)}
+.loc-item{margin-top:26px}
+.loc-item .lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.loc-addr{font-family:var(--display);font-size:20px;letter-spacing:.05em}
+.loc-item p{font-size:13px;color:var(--muted);margin-top:4px}
+.loc-item .ph-val{font-size:14px;color:#ddd}
+.loc-phones a{display:block;font-size:16px;font-weight:600;line-height:1.6}
+.loc-phones a:hover{color:var(--accent)}
+.loc-btns{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:28px}
+.loc-btns .btn{height:44px;font-size:11px}
+.map{position:relative;border:1px solid var(--line);overflow:hidden;min-height:480px;
+  background:
+   linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/40px 40px,
+   linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) 0 0/40px 40px,#121212;display:block}
+.map svg.roads{position:absolute;inset:0;width:100%;height:100%}
+.map-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#0b0b0b;border:1px solid #333;padding:18px 22px 14px;text-align:center;transition:.2s}
+.map:hover .map-pin{border-color:var(--accent)}
+.map-pin svg{width:28px;height:26px;margin:0 auto 10px;color:var(--accent)}
+.map-pin b{display:block;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.12em}
+.map-pin .ph{display:block;margin-top:8px}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid #1b1b1b;padding:56px 0 50px;background:#0b0b0b}
+.footer .wrap{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.footer p{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6}
+.f-phones{display:flex;gap:16px;margin-top:14px;font-size:12px;font-weight:600}
+.f-phones a:hover,.f-nav a:hover{color:var(--accent)}
+.copy{font-size:11px;color:var(--dim);margin-top:22px}
+.f-nav{display:flex;gap:26px;flex-wrap:wrap;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#cfcfcf;align-self:flex-start;padding-top:6px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav{gap:20px}.h-phone{display:none}
+  .services-grid,.price-grid{grid-template-columns:repeat(2,1fr)}
+  .calc{grid-template-columns:1fr}
+  .calc-side{border-left:0;border-top:1px solid var(--line)}
+  .book{grid-template-columns:1fr;gap:40px}
+  .loc{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:44px}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  .nav,.h-right .btn{display:none}
+  .burger{display:block}
+  .h-right{margin-left:auto}
+  .mobile-menu{display:flex;flex-direction:column;position:fixed;inset:72px 0 0 0;background:#090909;padding:30px 32px;gap:4px;z-index:49;transform:translateX(100%);transition:transform .3s}
+  .menu-open .mobile-menu{transform:none}
+  .mobile-menu a{font-family:var(--display);font-size:22px;letter-spacing:.06em;text-transform:uppercase;padding:14px 0;border-bottom:1px solid #1f1f1f}
+  .mobile-menu .btn{margin-top:26px;font-family:var(--body);font-size:12px;border:0}
+  .mobile-menu .m-phone{font-family:var(--body);font-size:16px;border:0;margin-top:18px;padding:0}
+  .hero-feats{grid-template-columns:1fr}
+  .hero-feats div+div{border-left:0;border-top:1px solid var(--line2)}
+  .hero-a{width:110vw;right:-40%;top:auto;bottom:4%;opacity:.5}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:18px}
+  .section{padding:84px 0}
+}
+@media (max-width:600px){
+  .wrap{padding:0 18px}
+  .services-grid,.price-grid,.extras,.form{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .calc-main{padding:32px 18px}
+  .calc-side{padding:30px 18px}
+  .steps{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .ba-before .ba-tag{left:12px}.ba-after .ba-tag{right:12px}
+  .hero{padding-top:120px}
+  .hero-btns .btn{width:100%}
+  .hero-media{display:none}
+  .svc{min-height:0}
+  .map{min-height:320px}
+  .loc-card{padding:30px 20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="logo" viewBox="0 0 26 24"><path fill="currentColor" d="M13 0 26 24h-6.2L13 11.2 6.2 24H0Z M13 15.2l3.3 6.1H9.7Z" fill-rule="evenodd"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 19a1.4 1.4 0 0 0 1.2 2h12.6a1.4 1.4 0 0 0 1.2-2L14 9V3"/><path d="M7 15h10"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-seat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6a1 1 0 0 1 1 1v9H7V4a1 1 0 0 1 1-1Z"/><path d="M5 13h13a1 1 0 0 1 1 1v3H5Z"/><path d="M7 17v4M17 17v4"/></symbol>
+    <symbol id="i-wash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18l-2 7H5Z"/><path d="M7 4c1 1-1 2 0 3.5M12 4c1 1-1 2 0 3.5M17 4c1 1-1 2 0 3.5"/><path d="M6 19v2M18 19v2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3c.6 4.6 3.4 8.2 9 9-5.6.8-8.4 4.4-9 9-.6-4.6-3.4-8.2-9-9 5.6-.8 8.4-4.4 9-9Z"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6Z"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3s6.5 7.2 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10.2 12 3 12 3Z"/></symbol>
+    <symbol id="i-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5C6 5 4 8 4 12s2 7 6 7Z"/><path d="M14 8h7M14 12h7M14 16h7"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="m12 3 2.8 5.8 6.2.9-4.5 4.4 1.1 6.2L12 17.4l-5.6 2.9 1.1-6.2L3 9.7l6.2-.9Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  </defs>
+</svg>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="AXIS"><svg><use href="#logo"/></svg>AXIS</a>
+    <nav class="nav">
+      <a href="#services">Послуги</a>
+      <a href="#prices">Ціни</a>
+      <a href="#works">Роботи</a>
+      <a href="#process">Як ми працюємо</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <div class="h-right">
+      <a class="h-phone" href="tel:+380666482300">066 648 23 00</a>
+      <a class="btn btn-primary" href="#booking">Записатися</a>
+      <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu">
+  <a href="#services">Послуги</a>
+  <a href="#prices">Ціни</a>
+  <a href="#works">Роботи</a>
+  <a href="#process">Як ми працюємо</a>
+  <a href="#contacts">Контакти</a>
+  <a class="btn btn-primary" href="#booking">Записатися</a>
+  <a class="m-phone" href="tel:+380666482300">066 648 23 00</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-a" viewBox="0 0 600 560" aria-hidden="true">
+    <defs>
+      <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#3a3a3a"/><stop offset=".55" stop-color="#1c1c1c"/><stop offset="1" stop-color="#101010"/>
+      </linearGradient>
+      <linearGradient id="ag2" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2c2c2c"/><stop offset="1" stop-color="#0d0d0d"/>
+      </linearGradient>
+    </defs>
+    <path d="M300 0 600 560H455L300 270Z" fill="url(#ag2)"/>
+    <path d="M300 0 300 270 145 560H0Z" fill="url(#ag)"/>
+    <path d="M300 360 378 505H222Z" fill="#1d1d1d"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-eyebrow">Детейлінг-студія · Житомир</div>
+    <h1>Ваше авто<br>як<br>з салону</h1>
+    <p class="hero-lead">Хімчистка салону, мийка, полірування та захисні покриття. Повертаємо інтер'єру свіжість, а лаку — глибину й блиск.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="#calc">Розрахувати вартість</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/axis.car_cleaning/" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#i-ig"/></svg>Написати в Instagram</a>
+    </div>
+    <div class="hero-feats">
+      <div><svg><use href="#i-flask"/></svg>Професійна хімія</div>
+      <div><svg><use href="#i-shield"/></svg>Гарантія результату</div>
+      <div><svg><use href="#i-pin"/></svg>Власний бокс · вул. Труда, 41</div>
+    </div>
+  </div>
+  <div class="hero-media ph">[Фото / відео авто у відблисках]</div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">01 / Послуги</div><h2 class="h2">Що ми робимо</h2></div>
+      <p>Від швидкої мийки до повного відновлення лаку — під кожен стан авто.</p>
+    </div>
+    <div class="services-grid">
+      <a class="svc reveal" href="#calc" data-pick="clean"><span class="svc-num">01</span><svg class="svc-ico"><use href="#i-seat"/></svg><h3>Хімчистка салону</h3><p>Три рівні: від швидкого освіження до повної хімчистки зі стелею та складними плямами.</p><div class="svc-foot">від ₴ 1 500<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="wash"><span class="svc-num">02</span><svg class="svc-ico"><use href="#i-wash"/></svg><h3>Мийка кузова</h3><p>Безконтактна, 2-х або 3-х фазна з рідким воском і чорнінням гуми.</p><div class="svc-foot">від ₴ 250<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="polish"><span class="svc-num">03</span><svg class="svc-ico"><use href="#i-spark"/></svg><h3>Полірування кузова</h3><p>1-, 2- або 3-step: від глянцю до максимального відновлення лаку.</p><div class="svc-foot">від ₴ 4 000<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="ceramic"><span class="svc-num">04</span><svg class="svc-ico"><use href="#i-badge"/></svg><h3>Кераміка</h3><p>Захисне покриття для глибокого блиску та захисту лаку.</p><div class="svc-foot">від ₴ 3 000<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="wax"><span class="svc-num">05</span><svg class="svc-ico"><use href="#i-drop"/></svg><h3>Твердий віск</h3><p>Насичений блиск і водовідштовхувальний ефект.</p><div class="svc-foot">від ₴ 1 000<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="lights"><span class="svc-num">06</span><svg class="svc-ico"><use href="#i-light"/></svg><h3>Полірування фар</h3><p>Повертаємо фарам прозорість і світловіддачу. Ціна за 1 шт.</p><div class="svc-foot">від ₴ 500<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="element"><span class="svc-num">07</span><svg class="svc-ico"><use href="#i-layers"/></svg><h3>Полірування елементу</h3><p>Локальне відновлення лаку на окремій деталі кузова.</p><div class="svc-foot">від ₴ 600<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+      <a class="svc reveal" href="#calc" data-pick="film"><span class="svc-num">08</span><svg class="svc-ico"><use href="#i-film"/></svg><h3>Плівка</h3><p>Захисна плівка на окремі елементи. Ціна за 1 шт.</p><div class="svc-foot">від ₴ 800<svg class="svc-arrow" width="16" height="16"><use href="#i-arrow"/></svg></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE LIST -->
+<section class="section" id="prices" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">02 / Прайс</div><h2 class="h2">Price list</h2></div>
+      <p>* Точна ціна залежить від розміру автомобіля та його забрудненості</p>
+    </div>
+    <div class="price-grid">
+      <div class="pcol reveal"><h3>Хімчистка</h3>
+        <div class="prow"><div class="top"><span>Easy</span><span>₴ 1 500</span></div><p>Пилосос, протирання пластику, скла</p></div>
+        <div class="prow"><div class="top"><span>Medium</span><span>₴ 4 000</span></div><p>Глибока чистка сидінь, ковролін, ретельна чистка пластику в 2 етапи</p></div>
+        <div class="prow"><div class="top"><span>Maximum</span><span>₴ 5 500</span></div><p>Повна хімчистка, стеля, складні плями</p></div>
+      </div>
+      <div class="pcol reveal"><h3>Мийка</h3>
+        <div class="prow"><div class="top"><span>Безконтактна</span><span>₴ 250</span></div></div>
+        <div class="prow"><div class="top"><span>2-х фазна</span><span>₴ 400</span></div></div>
+        <div class="prow"><div class="top"><span>3-х фазна</span><span>₴ 600</span></div><p>Рідкий віск, чорніння гуми</p></div>
+      </div>
+      <div class="pcol reveal"><h3>Полірування</h3>
+        <div class="prow"><div class="top"><span>Easy</span><span>₴ 4 000</span></div><p>1-step: освіження, глянець</p></div>
+        <div class="prow"><div class="top"><span>Medium</span><span>₴ 6 000</span></div><p>2-step: легкі подряпини, блиск</p></div>
+        <div class="prow"><div class="top"><span>Maximum</span><span>₴ 8 000</span></div><p>3-step: максимальне відновлення лаку в кілька етапів</p></div>
+      </div>
+      <div class="pcol reveal"><h3>Інші послуги</h3>
+        <div class="prow"><div class="top"><span>Кераміка</span><span>₴ 3 000</span></div></div>
+        <div class="prow"><div class="top"><span>Твердий віск</span><span>₴ 1 000</span></div></div>
+        <div class="prow"><div class="top"><span>Полірування елементу</span><span>₴ 600</span></div><p>Ціна за 1 елемент</p></div>
+        <div class="prow"><div class="top"><span>Полірування фар</span><span>₴ 500</span></div><p>Ціна за 1 шт.</p></div>
+        <div class="prow"><div class="top"><span>Плівка</span><span>₴ 800</span></div><p>Ціна за 1 шт.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section" id="calc" style="padding-top:20px">
+  <div class="wrap">
+    <div class="calc reveal">
+      <div class="calc-main">
+        <div class="eyebrow">03 / Калькулятор</div>
+        <h2 class="h2">Розрахуйте вартість</h2>
+
+        <div class="calc-group" data-group="clean" data-title="Хімчистка">
+          <div class="calc-label">Хімчистка</div>
+          <div class="opts">
+            <button type="button" class="opt" data-name="Easy" data-price="1500"><b>Easy</b><span>₴ 1 500</span></button>
+            <button type="button" class="opt" data-name="Medium" data-price="4000"><b>Medium</b><span>₴ 4 000</span></button>
+            <button type="button" class="opt" data-name="Maximum" data-price="5500"><b>Maximum</b><span>₴ 5 500</span></button>
+          </div>
+        </div>
+        <div class="calc-group" data-group="wash" data-title="Мийка">
+          <div class="calc-label">Мийка</div>
+          <div class="opts">
+            <button type="button" class="opt" data-name="Безконтактна" data-price="250"><b>Безконтактна</b><span>₴ 250</span></button>
+            <button type="button" class="opt" data-name="2-х фазна" data-price="400"><b>2-х фазна</b><span>₴ 400</span></button>
+            <button type="button" class="opt" data-name="3-х фазна" data-price="600"><b>3-х фазна</b><span>₴ 600</span></button>
+          </div>
+        </div>
+        <div class="calc-group" data-group="polish" data-title="Полірування">
+          <div class="calc-label">Полірування</div>
+          <div class="opts">
+            <button type="button" class="opt" data-name="Easy" data-price="4000"><b>Easy</b><span>₴ 4 000</span></button>
+            <button type="button" class="opt" data-name="Medium" data-price="6000"><b>Medium</b><span>₴ 6 000</span></button>
+            <button type="button" class="opt" data-name="Maximum" data-price="8000"><b>Maximum</b><span>₴ 8 000</span></button>
+          </div>
+        </div>
+        <div class="calc-group">
+          <div class="calc-label">Додатково</div>
+          <div class="extras">
+            <div class="extra" data-key="ceramic" data-name="Кераміка" data-price="3000"><span class="box"><svg><use href="#i-check"/></svg></span><span class="t">Кераміка<small>₴ 3 000</small></span></div>
+            <div class="extra" data-key="wax" data-name="Твердий віск" data-price="1000"><span class="box"><svg><use href="#i-check"/></svg></span><span class="t">Твердий віск<small>₴ 1 000</small></span></div>
+            <div class="extra" data-key="element" data-name="Полірування елементу" data-price="600" data-unit><span class="box"><svg><use href="#i-check"/></svg></span><span class="t">Полірування елементу<small>₴ 600 / шт.</small></span><span class="qty"><button type="button" data-d="-1" aria-label="Менше">−</button><output>1</output><button type="button" data-d="1" aria-label="Більше">+</button></span></div>
+            <div class="extra" data-key="lights" data-name="Полірування фар" data-price="500" data-unit><span class="box"><svg><use href="#i-check"/></svg></span><span class="t">Полірування фар<small>₴ 500 / шт.</small></span><span class="qty"><button type="button" data-d="-1" aria-label="Менше">−</button><output>2</output><button type="button" data-d="1" aria-label="Більше">+</button></span></div>
+            <div class="extra" data-key="film" data-name="Плівка" data-price="800" data-unit><span class="box"><svg><use href="#i-check"/></svg></span><span class="t">Плівка<small>₴ 800 / шт.</small></span><span class="qty"><button type="button" data-d="-1" aria-label="Менше">−</button><output>1</output><button type="button" data-d="1" aria-label="Більше">+</button></span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="calc-side">
+        <h4>Ваш набір</h4>
+        <div class="summary" id="summary">Оберіть послуги зліва — підсумок оновиться одразу.</div>
+        <div class="total-lbl">Разом</div>
+        <div class="total"><small>ВІД</small><span id="total">₴ 0</span></div>
+        <div class="total-note">Точна ціна залежить від розміру автомобіля та його забрудненості</div>
+        <a href="#booking" class="btn btn-primary" id="calcBook">Записатися з цим набором</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="section works" id="works">
+  <div class="wrap">
+    <div class="sec-head reveal" style="align-items:center">
+      <div><div class="eyebrow">04 / Роботи</div><h2 class="h2">До / після</h2></div>
+      <a class="btn btn-ghost" href="https://www.instagram.com/axis.car_cleaning/" target="_blank" rel="noopener" style="height:44px;font-size:11px">Більше робіт в Instagram</a>
+    </div>
+    <div class="ba reveal" id="ba">
+      <!-- Фото: img/ba-before.jpg та img/ba-after.jpg (полірування фар) -->
+      <div class="ba-pane ba-after"><span class="ba-tag">Після</span></div>
+      <div class="ba-pane ba-before"><span class="ba-tag">До</span></div>
+      <div class="ba-line"></div>
+      <div class="ba-handle"><span>‹›</span></div>
+    </div>
+    <div class="gallery">
+      <button type="button" class="work reveal" data-i="0"><img src="img/work-1.jpg" alt="Хімчистка ковроліну Renault — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+      <button type="button" class="work reveal" data-i="1"><img src="img/work-2.jpg" alt="Хімчистка підлоги Audi — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+      <button type="button" class="work reveal" data-i="2"><img src="img/work-3.jpg" alt="Хімчистка салону Renault — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+      <button type="button" class="work reveal" data-i="3"><img src="img/work-4.jpg" alt="Хімчистка салону Audi — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+      <button type="button" class="work reveal" data-i="4"><img src="img/work-5.jpg" alt="Хімчистка ковроліну Volkswagen — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+      <button type="button" class="work reveal" data-i="5"><img src="img/work-6.jpg" alt="Чистка пластику та ременя безпеки — до і після" loading="lazy"><span class="lb b">До</span><span class="lb a">Після</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal"><div><div class="eyebrow">05 / Процес</div><h2 class="h2">Як ми працюємо</h2></div></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h3>Заявка</h3><p>Пишете в Instagram, телефонуєте або залишаєте заявку на сайті.</p></div>
+      <div class="step reveal"><div class="n">02</div><h3>Огляд і розрахунок</h3><p>Оцінюємо розмір і стан авто та називаємо точну вартість і терміни.</p></div>
+      <div class="step reveal"><div class="n">03</div><h3>Робота</h3><p>Виконуємо узгоджений обсяг професійною хімією та обладнанням.</p></div>
+      <div class="step reveal"><div class="n">04</div><h3>Видача авто</h3><p>Показуємо результат і даємо поради з догляду.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section booking" id="booking">
+  <div class="wrap book">
+    <div class="book-text reveal">
+      <div class="eyebrow">06 / Запис</div>
+      <h2 class="h2">Запишіться<br>на детейлінг</h2>
+      <p>Залиште заявку — ми зателефонуємо, уточнимо деталі та підберемо зручний час.</p>
+    </div>
+    <div class="reveal" id="formWrap">
+      <form class="form" id="form" novalidate>
+        <div class="field"><label for="f-name">Ім'я</label><input id="f-name" name="name" placeholder="Олександр" required autocomplete="name"></div>
+        <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" placeholder="+380 __ ___ __ __" required autocomplete="tel"></div>
+        <div class="field"><label for="f-car">Марка та модель</label><input id="f-car" name="car" placeholder="Напр. Audi A6"></div>
+        <div class="field"><label for="f-svc">Послуга</label>
+          <select id="f-svc" name="service">
+            <option value="">Оберіть послугу</option>
+            <option>Хімчистка салону</option>
+            <option>Мийка кузова</option>
+            <option>Полірування кузова</option>
+            <option>Кераміка</option>
+            <option>Твердий віск</option>
+            <option>Полірування фар</option>
+            <option>Полірування елементу</option>
+            <option>Плівка</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-date">Бажана дата</label><input id="f-date" name="date" type="date"></div>
+        <div class="field"><label for="f-time">Бажаний час</label><select id="f-time" name="time"><option value="">Спершу оберіть дату</option></select></div>
+        <div class="field full"><label for="f-msg">Коментар</label><textarea id="f-msg" name="comment" placeholder="Що турбує найбільше: плями, запах, подряпини..."></textarea></div>
+        <div class="form-foot">
+          <button class="btn btn-primary" type="submit"><svg width="15" height="15"><use href="#i-ig"/></svg>Надіслати заявку</button>
+          <small>Натискаючи кнопку, ви погоджуєтесь на обробку даних</small>
+        </div>
+        <div class="form-ok">
+          <h3>Залишився один крок</h3>
+          <p id="okText">Текст заявки скопійовано — вставте його в чат Direct і надішліть.</p>
+          <pre id="msgPreview" style="white-space:pre-wrap;font-family:var(--body);font-size:13px;color:#ddd;background:#141414;border:1px solid #2c2c2c;padding:14px;margin:16px 0"></pre>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" id="dmLink" href="https://ig.me/m/axis.car_cleaning" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#i-ig"/></svg>Відкрити Direct</a>
+            <button class="btn btn-ghost" type="button" id="copyBtn">Скопіювати текст</button>
+          </div>
+          <p style="margin-top:14px;font-size:12px">Або зателефонуйте: <a href="tel:+380666482300" style="color:var(--accent)">066 648 23 00</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" id="contacts">
+  <div class="wrap loc">
+    <div class="loc-card reveal">
+      <div class="eyebrow">07 / Location</div>
+      <h2 class="h2">Як нас<br>знайти</h2>
+      <div class="loc-item"><div class="lbl">Адреса</div><div class="loc-addr">ВУЛ. ТРУДА, 41</div><p>Житомир, на території гаражного кооперативу «Аграрник»</p></div>
+      <div class="loc-item"><div class="lbl">Графік</div><div class="ph-val">[Пн–Сб 09:00–19:00]</div></div>
+      <div class="loc-item"><div class="lbl">Запис</div>
+        <div class="loc-phones"><a href="tel:+380666482300">066 648 23 00</a><a href="tel:+380687014361">068 701 43 61</a></div>
+        <p>або в Direct Instagram</p>
+      </div>
+      <div class="loc-btns">
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=%D0%96%D0%B8%D1%82%D0%BE%D0%BC%D0%B8%D1%80%2C+%D0%B2%D1%83%D0%BB.+%D0%A2%D1%80%D1%83%D0%B4%D0%B0%2C+41" target="_blank" rel="noopener">Прокласти маршрут</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/axis.car_cleaning/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <!-- Сюди можна вставити <iframe> Google Maps замість схеми -->
+    <a class="map reveal" href="https://www.google.com/maps/search/?api=1&query=%D0%96%D0%B8%D1%82%D0%BE%D0%BC%D0%B8%D1%80%2C+%D0%B2%D1%83%D0%BB.+%D0%A2%D1%80%D1%83%D0%B4%D0%B0%2C+41" target="_blank" rel="noopener" aria-label="Відкрити в Google Maps">
+      <svg class="roads" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M-20 360 L820 250" stroke="#2a2a2a" stroke-width="22"/>
+        <path d="M640 -20 L430 560" stroke="#262626" stroke-width="16"/>
+        <path d="M120 -20 L230 560" stroke="#1d1d1d" stroke-width="8"/>
+        <rect x="110" y="110" width="200" height="150" fill="none" stroke="#2a2a2a"/>
+        <rect x="118" y="118" width="184" height="134" fill="url(#hatch)"/>
+        <defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v10" stroke="#1d1d1d" stroke-width="4"/></pattern></defs>
+      </svg>
+      <div class="map-pin"><svg><use href="#logo"/></svg><b>AXIS · ТРУДА, 41</b><span class="ph">[Google Maps]</span></div>
+    </a>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox"><button class="lb-close" aria-label="Закрити">×</button><button class="lb-prev" aria-label="Попереднє">‹</button><img alt=""><button class="lb-next" aria-label="Наступне">›</button></div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a href="#top" class="logo"><svg><use href="#logo"/></svg>AXIS</a>
+      <p>Хімчистка салону, мийка та полірування авто.<br>Житомир, вул. Труда, 41, ГК «Аграрник».</p>
+      <div class="f-phones"><a href="tel:+380666482300">066 648 23 00</a><a href="tel:+380687014361">068 701 43 61</a></div>
+      <div class="copy">© AXIS, 2026</div>
+    </div>
+    <nav class="f-nav">
+      <a href="#services">Послуги</a><a href="#prices">Ціни</a><a href="#works">Роботи</a><a href="#contacts">Контакти</a>
+      <a href="https://www.instagram.com/axis.car_cleaning/" target="_blank" rel="noopener">@axis.car_cleaning</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const fmt = n => '₴ ' + n.toLocaleString('uk-UA').replace(/ |,/g,' ');
+
+  /* mobile menu */
+  const burger = document.querySelector('.burger');
+  burger.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('menu-open')));
+
+  /* reveal */
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.12}) : null;
+  document.querySelectorAll('.reveal').forEach((el,i) => {
+    el.style.transitionDelay = (el.parentElement.children.length > 2 ? (Array.from(el.parentElement.children).indexOf(el) % 4) * 70 : 0) + 'ms';
+    io ? io.observe(el) : el.classList.add('in');
+  });
+
+  /* calculator */
+  const groups = document.querySelectorAll('.calc-group[data-group]');
+  const extras = document.querySelectorAll('.extra');
+  const summary = document.getElementById('summary');
+  const totalEl = document.getElementById('total');
+  let current = [];
+
+  groups.forEach(g => g.querySelectorAll('.opt').forEach(o => o.addEventListener('click', () => {
+    const was = o.classList.contains('on');
+    g.querySelectorAll('.opt').forEach(x => x.classList.remove('on'));
+    if (!was) o.classList.add('on');
+    calc();
+  })));
+  extras.forEach(ex => {
+    ex.addEventListener('click', e => { if (e.target.closest('.qty')) return; ex.classList.toggle('on'); calc(); });
+    ex.querySelectorAll('.qty button').forEach(b => b.addEventListener('click', () => {
+      const out = ex.querySelector('output');
+      out.textContent = Math.min(20, Math.max(1, +out.textContent + +b.dataset.d));
+      calc();
+    }));
+  });
+
+  function calc(){
+    current = [];
+    groups.forEach(g => {
+      const o = g.querySelector('.opt.on');
+      if (o) current.push({name: g.dataset.title + ' · ' + o.dataset.name, sum: +o.dataset.price});
+    });
+    extras.forEach(ex => {
+      if (!ex.classList.contains('on')) return;
+      const q = ex.hasAttribute('data-unit') ? +ex.querySelector('output').textContent : 1;
+      current.push({name: ex.dataset.name + (ex.hasAttribute('data-unit') ? ' × ' + q : ''), sum: +ex.dataset.price * q});
+    });
+    const total = current.reduce((s,i) => s + i.sum, 0);
+    totalEl.textContent = fmt(total);
+    summary.innerHTML = current.length
+      ? '<ul>' + current.map(i => `<li><span>${i.name}</span><span>${fmt(i.sum)}</span></li>`).join('') + '</ul>'
+      : 'Оберіть послуги зліва — підсумок оновиться одразу.';
+  }
+
+  /* service cards preselect calculator */
+  const groupMap = {clean:0, wash:0, polish:0};
+  document.querySelectorAll('.svc[data-pick]').forEach(card => card.addEventListener('click', () => {
+    const k = card.dataset.pick;
+    const g = document.querySelector(`.calc-group[data-group="${k}"]`);
+    if (g) { if (!g.querySelector('.opt.on')) g.querySelector('.opt').classList.add('on'); }
+    else { const ex = document.querySelector(`.extra[data-key="${k}"]`); if (ex) ex.classList.add('on'); }
+    calc();
+  }));
+
+  /* book with set */
+  document.getElementById('calcBook').addEventListener('click', () => {
+    if (!current.length) return;
+    const total = current.reduce((s,i) => s + i.sum, 0);
+    const text = current.map(i => i.name.replace(' · ', ' ')).join(', ') + ' (від ' + fmt(total) + ')';
+    const sel = document.getElementById('f-svc');
+    let o = document.getElementById('opt-set');
+    if (!o) { o = document.createElement('option'); o.id = 'opt-set'; sel.insertBefore(o, sel.options[1]); }
+    o.value = o.textContent = text;
+    sel.value = text;
+  });
+
+  /* lightbox */
+  const works = [...document.querySelectorAll('.work')];
+  const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+  let li = 0;
+  const show = i => { li = (i + works.length) % works.length; const im = works[li].querySelector('img'); lbImg.src = im.src; lbImg.alt = im.alt; };
+  works.forEach((w,i) => w.addEventListener('click', () => { show(i); lb.classList.add('open'); document.body.style.overflow='hidden'; }));
+  const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow=''; };
+  lb.querySelector('.lb-close').onclick = closeLb;
+  lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); show(li-1); };
+  lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); show(li+1); };
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (!lb.classList.contains('open')) return;
+    if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') show(li-1); if (e.key==='ArrowRight') show(li+1); });
+
+  /* before / after */
+  const ba = document.getElementById('ba');
+  const before = ba.querySelector('.ba-before'), line = ba.querySelector('.ba-line'), handle = ba.querySelector('.ba-handle');
+  let drag = false;
+  function setPos(x){
+    const r = ba.getBoundingClientRect();
+    const p = Math.min(100, Math.max(0, (x - r.left) / r.width * 100));
+    before.style.clipPath = `inset(0 ${100-p}% 0 0)`;
+    line.style.left = handle.style.left = p + '%';
+  }
+  ba.addEventListener('pointerdown', e => { drag = true; ba.setPointerCapture(e.pointerId); setPos(e.clientX); });
+  ba.addEventListener('pointermove', e => drag && setPos(e.clientX));
+  ['pointerup','pointercancel'].forEach(t => ba.addEventListener(t, () => drag = false));
+
+  /* form */
+  /* ГРАФІК РОБОТИ — змінюйте тут.
+     days: дні тижня (0 = неділя, 1 = понеділок … 6 = субота)
+     open / close: години роботи; step: крок запису у хвилинах;
+     lastSlot: за скільки хвилин до закриття останній запис */
+  const SCHEDULE = { days:[1,2,3,4,5,6], open:'09:00', close:'19:00', step:60, lastSlot:60 };
+
+  const dateIn = document.getElementById('f-date');
+  const timeSel = document.getElementById('f-time');
+  const pad = n => String(n).padStart(2,'0');
+  const toMin = s => { const [h,m] = s.split(':'); return +h*60 + +m; };
+  const iso = d => d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
+  const dayNames = ['неділю','понеділок','вівторок','середу','четвер','пʼятницю','суботу'];
+
+  // мінімальна дата — найближчий робочий день, на який ще можна записатися
+  (function(){
+    const d = new Date();
+    for (let i = 0; i < 14; i++) {
+      if (SCHEDULE.days.includes(d.getDay()) && slotsFor(d).length) break;
+      d.setDate(d.getDate() + 1); d.setHours(0,0,0,0);
+    }
+    dateIn.min = iso(d);
+    const max = new Date(); max.setMonth(max.getMonth() + 3); dateIn.max = iso(max);
+  })();
+
+  function slotsFor(date){
+    const out = [];
+    const now = new Date(), isToday = iso(date) === iso(now);
+    const nowMin = now.getHours()*60 + now.getMinutes() + 60; // не раніше ніж за годину
+    for (let m = toMin(SCHEDULE.open); m <= toMin(SCHEDULE.close) - SCHEDULE.lastSlot; m += SCHEDULE.step) {
+      if (isToday && m < nowMin) continue;
+      out.push(pad(Math.floor(m/60)) + ':' + pad(m%60));
+    }
+    return out;
+  }
+
+  function fillTimes(){
+    const fld = dateIn.closest('.field');
+    let hint = fld.querySelector('.hint');
+    if (!hint) { hint = document.createElement('small'); hint.className = 'hint'; hint.style.cssText = 'font-size:11px;color:#e5484d'; fld.appendChild(hint); }
+    hint.textContent = '';
+    fld.classList.remove('err');
+    const prev = timeSel.value;
+    if (!dateIn.value) { timeSel.innerHTML = '<option value="">Спершу оберіть дату</option>'; return; }
+    const d = new Date(dateIn.value + 'T00:00');
+    let msg = '';
+    if (dateIn.value < dateIn.min) msg = 'Оберіть дату, не раніше ніж ' + dateIn.min.split('-').reverse().join('.');
+    else if (!SCHEDULE.days.includes(d.getDay())) msg = 'У ' + dayNames[d.getDay()] + ' ми не працюємо — оберіть інший день';
+    const slots = msg ? [] : slotsFor(d);
+    if (!msg && !slots.length) msg = 'На цей день запис уже закрито — оберіть інший';
+    if (msg) {
+      hint.textContent = msg; fld.classList.add('err');
+      timeSel.innerHTML = '<option value="">Немає вільного часу</option>';
+      return;
+    }
+    timeSel.innerHTML = '<option value="">Оберіть час</option>' + slots.map(s => `<option${s===prev?' selected':''}>${s}</option>`).join('');
+  }
+  dateIn.addEventListener('change', fillTimes);
+  dateIn.addEventListener('input', fillTimes);
+  const phone = document.getElementById('f-phone');
+  phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+380 '; });
+  phone.addEventListener('input', () => {
+    let d = phone.value.replace(/\D/g,'');
+    if (d.startsWith('380')) d = d.slice(3);
+    if (d.startsWith('0')) d = d.slice(1);
+    d = d.slice(0,9);
+    let out = '+380';
+    if (d.length) out += ' ' + d.slice(0,2);
+    if (d.length > 2) out += ' ' + d.slice(2,5);
+    if (d.length > 5) out += ' ' + d.slice(5,7);
+    if (d.length > 7) out += ' ' + d.slice(7,9);
+    phone.value = out;
+  });
+  document.getElementById('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    let ok = true;
+    [['f-name', v => v.trim().length > 1], ['f-phone', v => v.replace(/\D/g,'').length === 12]].forEach(([id, test]) => {
+      const el = document.getElementById(id), fld = el.closest('.field');
+      const good = test(el.value); fld.classList.toggle('err', !good); if (!good) ok = false;
+    });
+    if (dateIn.closest('.field').classList.contains('err')) ok = false;
+    if (!ok) return;
+    const d = Object.fromEntries(new FormData(f));
+    const dt = d.date ? d.date.split('-').reverse().join('.') : '';
+    const msg = ['Вітаю! Хочу записатися на детейлінг.',
+      'Ім\'я: ' + d.name.trim(),
+      'Телефон: ' + d.phone,
+      d.car && 'Авто: ' + d.car,
+      d.service && 'Послуга: ' + d.service,
+      (dt || d.time) && 'Бажаний час: ' + [dt, d.time].filter(Boolean).join(', '),
+      d.comment && 'Коментар: ' + d.comment
+    ].filter(Boolean).join('\n');
+    document.getElementById('msgPreview').textContent = msg;
+    copy(msg).then(ok => {
+      document.getElementById('okText').textContent = ok
+        ? 'Текст заявки скопійовано — вставте його в чат Direct і надішліть.'
+        : 'Скопіюйте текст нижче, вставте в чат Direct і надішліть.';
+    });
+    window.open(DM, '_blank', 'noopener');
+    document.getElementById('formWrap').classList.add('sent');
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+  });
+  const DM = 'https://ig.me/m/axis.car_cleaning';
+  function copy(t){
+    if (navigator.clipboard && window.isSecureContext)
+      return navigator.clipboard.writeText(t).then(() => true, () => fallback(t));
+    return Promise.resolve(fallback(t));
+  }
+  function fallback(t){
+    try { const a = document.createElement('textarea'); a.value = t; a.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(a); a.select(); const ok = document.execCommand('copy'); a.remove(); return ok; }
+    catch(e){ return false; }
+  }
+  document.getElementById('copyBtn').addEventListener('click', e => {
+    copy(document.getElementById('msgPreview').textContent).then(ok => { e.target.textContent = ok ? 'Скопійовано ✓' : 'Виділіть текст вручну'; });
+  });
+  document.querySelectorAll('.field input:not([type=date])').forEach(i => i.addEventListener('input', () => i.closest('.field').classList.remove('err')));
+})();
+</script>
+</body>
+</html>
