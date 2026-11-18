@@ -198,6 +198,18 @@ img,svg{display:block}
 .field input::placeholder,.field textarea::placeholder{color:#5f5f5f}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
 .field.err input,.field.err select{border-color:#e5484d}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.chip{display:flex;align-items:center;gap:12px;text-align:left;background:#141414;border:1px solid #2c2c2c;padding:11px 14px;cursor:pointer;font-size:13px;transition:.18s}
+.chip:hover{border-color:#444}
+.chip .box{width:16px;height:16px;flex:none;border:1.5px solid #cfcfcf;display:grid;place-items:center;transition:.15s}
+.chip .box svg{width:11px;height:11px;opacity:0;color:#04121a}
+.chip.on{border-color:var(--accent);background:rgba(44,181,238,.07)}
+.chip.on .box{background:var(--accent);border-color:var(--accent)}
+.chip.on .box svg{opacity:1}
+.chip .ct small{color:var(--accent);font-weight:600}
+.lbl-note{letter-spacing:.04em;text-transform:none;color:var(--dim)}
+.chips-total{font-size:12px;color:var(--muted);min-height:0}
+.chips-total b{color:var(--text)}
 .form-foot{grid-column:1/-1;margin-top:8px}
 .form-foot .btn{min-width:200px}
 .form-foot small{display:block;font-size:11px;color:var(--dim);margin-top:14px}
@@ -269,6 +281,7 @@ img,svg{display:block}
 @media (max-width:600px){
   .wrap{padding:0 18px}
   .services-grid,.price-grid,.extras,.form{grid-template-columns:1fr}
+  .chips{grid-template-columns:1fr}
   .opts{grid-template-columns:1fr}
   .calc-main{padding:32px 18px}
   .calc-side{padding:30px 18px}
@@ -528,19 +541,19 @@ img,svg{display:block}
       <form class="form" id="form" novalidate>
         <div class="field"><label for="f-name">Ім'я</label><input id="f-name" name="name" placeholder="Олександр" required autocomplete="name"></div>
         <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" placeholder="+380 __ ___ __ __" required autocomplete="tel"></div>
-        <div class="field"><label for="f-car">Марка та модель</label><input id="f-car" name="car" placeholder="Напр. Audi A6"></div>
-        <div class="field"><label for="f-svc">Послуга</label>
-          <select id="f-svc" name="service">
-            <option value="">Оберіть послугу</option>
-            <option>Хімчистка салону</option>
-            <option>Мийка кузова</option>
-            <option>Полірування кузова</option>
-            <option>Кераміка</option>
-            <option>Твердий віск</option>
-            <option>Полірування фар</option>
-            <option>Полірування елементу</option>
-            <option>Плівка</option>
-          </select>
+        <div class="field full"><label for="f-car">Марка та модель</label><input id="f-car" name="car" placeholder="Напр. Audi A6"></div>
+        <div class="field full"><label>Послуги <span class="lbl-note">— можна обрати кілька</span></label>
+          <div class="chips" id="chips">
+            <button type="button" class="chip" data-key="clean" data-name="Хімчистка салону" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Хімчистка салону</span></button>
+            <button type="button" class="chip" data-key="wash" data-name="Мийка кузова" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Мийка кузова</span></button>
+            <button type="button" class="chip" data-key="polish" data-name="Полірування кузова" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Полірування кузова</span></button>
+            <button type="button" class="chip" data-key="ceramic" data-name="Кераміка" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Кераміка</span></button>
+            <button type="button" class="chip" data-key="wax" data-name="Твердий віск" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Твердий віск</span></button>
+            <button type="button" class="chip" data-key="lights" data-name="Полірування фар" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Полірування фар</span></button>
+            <button type="button" class="chip" data-key="element" data-name="Полірування елементу" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Полірування елементу</span></button>
+            <button type="button" class="chip" data-key="film" data-name="Плівка" aria-pressed="false"><span class="box"><svg><use href="#i-check"/></svg></span><span class="ct">Плівка</span></button>
+          </div>
+          <div class="chips-total" id="chipsTotal"></div>
         </div>
         <div class="field"><label for="f-date">Бажана дата</label><input id="f-date" name="date" type="date"></div>
         <div class="field"><label for="f-time">Бажаний час</label><select id="f-time" name="time"><option value="">Спершу оберіть дату</option></select></div>
@@ -689,16 +702,25 @@ img,svg{display:block}
     calc();
   }));
 
-  /* book with set */
+  /* book with set → mark services in form */
+  const chips = [...document.querySelectorAll('.chip')];
+  const chipsTotal = document.getElementById('chipsTotal');
+  let calcTotal = 0;
+  const setChip = (c, on, detail) => {
+    c.classList.toggle('on', on); c.setAttribute('aria-pressed', on);
+    c.dataset.detail = on && detail ? detail : '';
+    c.querySelector('.ct').innerHTML = c.dataset.name + (c.dataset.detail ? ` <small>${c.dataset.detail}</small>` : '');
+  };
+  const showTotal = () => { chipsTotal.innerHTML = calcTotal ? 'Орієнтовно: <b>від ' + fmt(calcTotal) + '</b> (з калькулятора)' : ''; };
+  chips.forEach(c => c.addEventListener('click', () => { setChip(c, !c.classList.contains('on')); calcTotal = 0; showTotal(); }));
   document.getElementById('calcBook').addEventListener('click', () => {
     if (!current.length) return;
-    const total = current.reduce((s,i) => s + i.sum, 0);
-    const text = current.map(i => i.name.replace(' · ', ' ')).join(', ') + ' (від ' + fmt(total) + ')';
-    const sel = document.getElementById('f-svc');
-    let o = document.getElementById('opt-set');
-    if (!o) { o = document.createElement('option'); o.id = 'opt-set'; sel.insertBefore(o, sel.options[1]); }
-    o.value = o.textContent = text;
-    sel.value = text;
+    chips.forEach(c => setChip(c, false));
+    groups.forEach(g => { const o = g.querySelector('.opt.on'); if (o) setChip(document.querySelector(`.chip[data-key="${g.dataset.group}"]`), true, o.dataset.name); });
+    extras.forEach(ex => { if (!ex.classList.contains('on')) return;
+      const q = ex.hasAttribute('data-unit') ? +ex.querySelector('output').textContent : 0;
+      setChip(document.querySelector(`.chip[data-key="${ex.dataset.key}"]`), true, q ? '× ' + q : ''); });
+    calcTotal = current.reduce((s,i) => s + i.sum, 0); showTotal();
   });
 
   /* lightbox */
@@ -813,12 +835,13 @@ img,svg{display:block}
     if (dateIn.closest('.field').classList.contains('err')) ok = false;
     if (!ok) return;
     const d = Object.fromEntries(new FormData(f));
+    const services = chips.filter(c => c.classList.contains('on')).map(c => c.dataset.name + (c.dataset.detail ? ' ' + c.dataset.detail : ''));
     const dt = d.date ? d.date.split('-').reverse().join('.') : '';
     const msg = ['Вітаю! Хочу записатися на детейлінг.',
       'Ім\'я: ' + d.name.trim(),
       'Телефон: ' + d.phone,
       d.car && 'Авто: ' + d.car,
-      d.service && 'Послуга: ' + d.service,
+      services.length && 'Послуги: ' + services.join(', ') + (calcTotal ? ' (від ' + fmt(calcTotal) + ')' : ''),
       (dt || d.time) && 'Бажаний час: ' + [dt, d.time].filter(Boolean).join(', '),
       d.comment && 'Коментар: ' + d.comment
     ].filter(Boolean).join('\n');
